@@ -11,10 +11,14 @@ import WishlistDrawer from './components/WishlistDrawer';
 import BoutiqueLocatorModal from './components/BoutiqueLocatorModal';
 import ConciergeModal from './components/ConciergeModal';
 import Footer from './components/Footer';
+import WmsPortal from './components/wms/WmsPortal';
 import { BAGS_DATA, CATEGORIES, formatRupees } from './data/bagsData';
-import { SlidersHorizontal, ArrowUpDown, Sparkles, MessageCircle, ShoppingBag, ShieldCheck } from 'lucide-react';
+import { SlidersHorizontal, ArrowUpDown, Sparkles, MessageCircle, ShoppingBag, ShieldCheck, Compass } from 'lucide-react';
 
 export default function App() {
+  // View Mode: 'store' (Customer facing luxury site) or 'wms' (Flipkart FlowLite / Blinkit darkstore portal)
+  const [viewMode, setViewMode] = useState('store');
+
   // Navigation & Category
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortBy, setSortBy] = useState('featured'); // 'featured' | 'price-asc' | 'price-desc' | 'rating'
@@ -193,6 +197,11 @@ export default function App() {
   const cartTotal = cart.reduce((acc, it) => acc + it.price * it.quantity, 0);
   const cartCount = cart.reduce((acc, it) => acc + it.quantity, 0);
 
+  // If in FlowLite WMS Operations Mode
+  if (viewMode === 'wms') {
+    return <WmsPortal onBackToStorefront={() => setViewMode('store')} />;
+  }
+
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#111111] flex flex-col font-sans selection:bg-[#0F3B2E] selection:text-white">
       {/* Gucci-style Luxury Top Navigation */}
@@ -207,6 +216,7 @@ export default function App() {
         onOpenSearch={() => setSearchOpen(true)}
         onOpenBoutiques={() => setBoutiquesOpen(true)}
         onOpenConcierge={() => setConciergeOpen(true)}
+        onOpenWms={() => setViewMode('wms')}
       />
 
       {/* Hero Campaign Banner */}
@@ -375,6 +385,23 @@ export default function App() {
             </span>
             <span className="text-[9px] text-[#C5A059]">Live Advisor</span>
           </div>
+        </button>
+      </div>
+
+      {/* Floating Operations WMS Portal Shortcut (Bottom Left for Staff & Owner) */}
+      <div className="fixed bottom-6 left-6 z-30">
+        <button
+          onClick={() => setViewMode('wms')}
+          className="bg-[#111111] hover:bg-[#0F3B2E] text-white py-2.5 px-3.5 shadow-2xl rounded flex items-center space-x-2 transition-all duration-300 border border-[#C5A059]/60 hover:scale-105"
+          title="Open FlowLite WMS (For Owner & Staff Only)"
+        >
+          <Compass className="w-4 h-4 text-[#C5A059]" />
+          <span className="text-[10px] tracking-[0.18em] uppercase font-mono font-bold text-[#F5F2EB]">
+            FLOWLITE WMS
+          </span>
+          <span className="text-[9px] bg-emerald-900 text-emerald-300 px-1.5 py-0.2 rounded font-mono">
+            STAFF
+          </span>
         </button>
       </div>
 

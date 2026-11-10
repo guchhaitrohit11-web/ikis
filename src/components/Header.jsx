@@ -24,7 +24,8 @@ export default function Header({
   onOpenWishlist,
   onOpenSearch,
   onOpenBoutiques,
-  onOpenConcierge
+  onOpenConcierge,
+  onOpenWms
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -78,6 +79,15 @@ export default function Header({
           >
             <PhoneCall className="w-3 h-3 text-[#C5A059]" />
             <span>CLIENT ADVISOR</span>
+          </button>
+          <span className="text-[#E5E0D8]/40">|</span>
+          <button 
+            onClick={onOpenWms}
+            className="bg-[#111111] hover:bg-[#C5A059] hover:text-[#111111] text-[#F5F2EB] px-2 py-0.5 rounded font-mono text-[9px] tracking-wider uppercase border border-[#C5A059]/50 transition-colors flex items-center space-x-1"
+            title="Open Warehouse & Dark Store Operations Management System"
+          >
+            <Compass className="w-2.5 h-2.5 text-[#C5A059]" />
+            <span>FLOWLITE WMS</span>
           </button>
         </div>
       </div>
@@ -307,6 +317,20 @@ export default function Header({
                     <div>
                       <div className="font-medium">Private Client Concierge</div>
                       <div className="text-[10px] tracking-normal text-[#737373] capitalize">Direct VIP Assistance & Bespoke Orders</div>
+                    </div>
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenWms();
+                    }}
+                    className="w-full flex items-center space-x-3 text-xs tracking-[0.15em] uppercase text-[#0F3B2E] bg-[#0F3B2E]/10 p-2 rounded transition-colors text-left border border-[#0F3B2E]/30"
+                  >
+                    <Compass className="w-4 h-4 text-[#0F3B2E]" />
+                    <div>
+                      <div className="font-bold">IKIS FlowLite Operations WMS</div>
+                      <div className="text-[10px] tracking-normal text-[#555555] capitalize">Employee & Owner Fulfillment Portal</div>
                     </div>
                   </button>
                 </div>

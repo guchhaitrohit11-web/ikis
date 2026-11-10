@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .font-serif {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .font-display {
+    font-family: 'Italiana', serif;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom Luxury Webbing Accent - Iconic IKIS Forest Green and Crimson Red */
+.ikis-stripe {
+  background: linear-gradient(
+    90deg,
+    #0F3B2E 0%,
+    #0F3B2E 35%,
+    #8B1E26 35%,
+    #8B1E26 65%,
+    #0F3B2E 65%,
+    #0F3B2E 100%
+  );
+}
+
+.ikis-stripe-vertical {
+  background: linear-gradient(
+    180deg,
+    #0F3B2E 0%,
+    #0F3B2E 35%,
+    #8B1E26 35%,
+    #8B1E26 65%,
+    #0F3B2E 65%,
+    #0F3B2E 100%
+  );
+}
+
+/* Luxury Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0F3B2E;
+}
+
+/* Subtle image zoom animation */
+.zoom-effect {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .zoom-effect {
+  transform: scale(1.05);
+}
+
+/* Shimmer placeholder */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0ede6 25%, #fbf9f5 50%, #f0ede6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
